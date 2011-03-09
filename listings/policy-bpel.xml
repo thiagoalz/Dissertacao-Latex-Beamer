@@ -1,0 +1,8 @@
+<b:invoke
+	partnerLink="Seller"
+	portType="a:Purchasing"
+	operation="Purchase"
+	inputVariable="SendOrder"
+	outputVariable="getResponse"
+	p:PolicyURIs="...policies#RM
+	...policies#SEC">

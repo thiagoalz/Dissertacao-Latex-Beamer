@@ -1,0 +1,48 @@
+%%
+%% This is file `tex/mycommon.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% src/templates.dtx  (with options: `all')
+%% src/mycommon.dtx  (with options: `mycommon')
+%% 
+%% Copyright (C) 2009  by Lluis Vilanova
+%% 
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.2 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of
+%% LaTeX version 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mycommon}[2007/07/02 v0.1 Basic class style settings, used by all my* classes]
+%%% General
+\RequirePackage{ifthen}
+\RequirePackage{xkeyval}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}   % mathematical facilities
+\RequirePackage{url}       % verbatim with URL-sensitive line breaks
+%%% Graphics
+\RequirePackage{xcolor}    % provide names for common colors and advanced color construction
+\RequirePackage{epsfig}
+\RequirePackage{graphics}
+\RequirePackage{graphicx}
+%%% Fonts
+%%\RequirePackage{times}
+%%\RequirePackage[T1]{fontenc}
+%%\RequirePackage{ae,aecompl}  % For better PostScript output
+%%% Others
+%%\RequirePackage{eurosym}   % Enable euro symbol
+%%\RequirePackage{pdfpages}  % Include external multi-page pdfs
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO}: #1}}
+
+
+\endinput
+%%
+%% End of file `tex/mycommon.sty'.

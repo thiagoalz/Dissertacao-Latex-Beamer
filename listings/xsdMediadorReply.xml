@@ -1,0 +1,8 @@
+<xs:schema>
+  <xs:element name="response" type="tns:response"/>
+  <xs:complexType name="response">
+    <xs:sequence>
+      <xs:element name="result" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

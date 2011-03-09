@@ -1,0 +1,20 @@
+<definitions name="AsyncSharcnetImplService">   
+
+    <message name="response">
+        <part name="RelatesTo" element="wsa:RelatesTo" />
+        <part name="parameters" element="tns:response"/>
+    </message>
+
+    <binding name="AsyncSharcnetResponseImplPortBinding" type="tns:AsyncSharcnetResponseImpl">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="response">
+            <soap:operation soapAction=""/>
+            <input>
+                <soap:header message="tns:response" part="RelatesTo" use="literal"/>
+                <soap:body use="literal" parts="parameters" />
+            </input>
+        </operation>
+    </binding>
+    
+</definitions>
+

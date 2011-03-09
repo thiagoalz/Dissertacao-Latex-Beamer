@@ -1,0 +1,6 @@
+<assign name="Assign1">            
+    <copy>
+        <from>$RunOut.parameters/return</from>
+        <to variable="ExecSharcnetIn" sxnmp:nmProperty="org.glassfish.openesb.outbound.address.url"/>
+    </copy>
+</assign>

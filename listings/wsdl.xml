@@ -1,0 +1,29 @@
+<definitions name="ImplementacaoService" targetNamespace="http://ewe.org/">
+
+    <message name="executarMsg">
+        <part name="parameters" element="executarParam" />
+    </message>
+
+    <portType name="Implementacao">
+        <operation name="executar">
+            <input wsaw:Action=".../executar" message="executarMsg" />
+        </operation>
+    </portType>
+
+    <!-- Binding concreto usando SOAP-->
+    <binding name="ImplementacaoPortBinding" type="Implementacao">        
+        <soap:binding transport=".../soap/http" style="document" />
+        <operation name="executar">            
+            <input>
+                <soap:body parts="parameters"/>
+            </input>
+        </operation>
+    </binding>
+
+    <service name="ImplementacaoService">
+        <port name="ImplementacaoPort" binding="ImplementacaoPortBinding">
+            <soap:address location=".../Implementacao" />
+        </port>
+    </service>
+
+</definitions>

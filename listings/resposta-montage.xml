@@ -1,0 +1,69 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Body>
+
+      <typeA xmlns:msgns="http://enterprise.netbeans.org/bpel/AsynchronousClient" xmlns="http://enterprise.netbeans.org/bpel/AsynchronousSchemaNamespace">
+
+<paramA xmlns="">
+<![CDATA[
+
+===RESULTADO CLUSTER====
+
+====Adicionando binarios no PATH====
+====Iniciando execucao====
+
+==Step Two: Reproject images==
+[struct stat="OK", count=10, badfits=0]
+[struct stat="OK", count=10, failed=0, nooverlap=0]
+[struct stat="OK", count=10, badfits=0]
+====Copiando arquivos para Home====
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@lsfhost.localdomain>
+Subject: Job 239172: <srun sh /home/tlechuga/Montage/executar1c.sh> Done
+
+Job <srun sh /home/tlechuga/Montage/executar1c.sh> was submitted from host <saw377> by user <tlechuga>.
+Job was executed on host(s) <lsfhost.localdomain>, in queue <serial>, as user <tlechuga>.
+</home/tlechuga> was used as the home directory.
+</home/tlechuga> was used as the working directory.
+Started at Mon May 24 15:56:26 2010
+Results reported at Mon May 24 15:57:40 2010
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+srun sh /home/tlechuga/Montage/executar1c.sh
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      1.51 sec.
+    Max Memory :         2 MB
+    Max Swap   :       125 MB
+
+
+The output (if any) is above this job summary.
+
+
+
+
+===RESULTADOS NAO CLUSTER====
+
+[Transferindo Arquivos]:OK
+[struct stat="OK", time=6]
+[struct stat="OK", min=80.7457, minpercent=20.00, max=180.992, maxpercent=99.98]
+[struct stat="OK", count=17]
+[struct stat="OK", count=17, failed=0]
+[struct stat="OK", count=17, failed=0, warning=0, missing=0]
+[struct stat="OK"]
+[struct stat="OK", count=10, nocorrection=0, failed=0]
+[struct stat="OK", time=3]
+[struct stat="OK", min=82.3305, minpercent=20.00, max=178.268, maxpercent=99.98]]]>
+</paramA>
+
+         <id xmlns="">54321</id>
+      </typeA>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

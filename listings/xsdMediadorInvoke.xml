@@ -1,0 +1,20 @@
+<xs:schema>
+
+  <xs:element name="execSharcnet" type="tns:execSharcnet"></xs:element>
+
+  <xs:complexType name="execSharcnet">
+    <xs:sequence>
+      <xs:element name="server" type="string"></xs:element>
+      <xs:element name="login" type="string"></xs:element>
+      <xs:element name="senha" type="string"></xs:element>
+      <xs:element name="servico" type="string"></xs:element> 
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+
+
+
+  
+
+

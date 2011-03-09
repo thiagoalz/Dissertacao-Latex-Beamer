@@ -1,0 +1,11 @@
+<wsp:Policy>
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <resp:CPU
+          xmlns:qosp=".../schema/respolicy"
+          operation="InvokeSharcnet"
+          specification="uddi:qos:attribute:
+          CPUPower">high</resp:CPU>
+      </wsp:All>
+    </wsp:ExactlyOne>
+</wsp:Policy>

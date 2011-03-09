@@ -1,0 +1,36 @@
+<process name="Sharcnet">    
+    
+    <partnerLinks>  
+        <partnerLink name="PLSharcnet" partnerLinkType="AsyncSharcnet" partnerRole="role1"/> 
+	...      
+    </partnerLinks>
+
+    <variables>
+        <variable name="RunOut" messageType="runResponse"/>
+        <variable name="RunIn" messageType="run"/>        
+    </variables>    
+
+    <sequence>
+        <receive name="ReceiveInicio" createInstance="yes" partnerLink="PLinkClient"
+	operation="operationA" portType="MyPortTypeClient" variable="OperationAIn" />
+
+        <assign name="Assign0">
+            <copy>
+                <from>'VALOR1'</from>
+                <to>$RunIn.parameters/arg0</to>
+            </copy>
+            <copy>
+                <from>'VALOR2'</from>
+                <to>$RunIn.parameters/arg1</to>
+            </copy>
+        </assign>
+
+        <invoke name="InvokeSharcnet" partnerLink="PartnerLinkSharcnetExec"
+	operation="execSharcnet" inputVariable="ExecSharcnetIn"/>
+    </sequence>
+
+    <correlationSets>
+        <correlationSet name="wzrd_set_InvokeSharcnet_ReceiveSharcnet" properties="wzrd_prop_MessageID_RelatesTo"/>
+    </correlationSets>
+
+</process>

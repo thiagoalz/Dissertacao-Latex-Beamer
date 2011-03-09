@@ -1,0 +1,11 @@
+<wsp:Policy>
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <qosp:ResponseTime
+          xmlns:qosp=".../schema/qospolicy"
+          operation="get"
+          specification="uddi:qos:attribute:
+          responsetime">45</qosp:ResponseTime>
+      </wsp:All>
+    </wsp:ExactlyOne>
+</wsp:Policy>

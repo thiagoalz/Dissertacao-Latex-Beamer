@@ -1,0 +1,17 @@
+<soapenv:Envelope>
+
+   <soapenv:Header>
+      <add:MessageID>ID-Unico</add:MessageID>
+      <add:ReplyTo>
+         <add:Address>http://127.0.0.1/</add:Address>
+      </add:ReplyTo>
+   </soapenv:Header>
+
+   <soapenv:Body>
+      <ewe:executar>
+         <comando>parametro1</comando>
+         <arqOutput>parametro2</arqOutput>
+      </ewe:execSharcnet>
+   </soapenv:Body>
+
+</soapenv:Envelope>

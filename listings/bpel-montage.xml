@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process
+    name="Sharcnet"
+    targetNamespace="http://enterprise.netbeans.org/bpel/ExemploAsynchronous/Sharcnet"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/ExemploAsynchronous/Sharcnet" xmlns:sxed2="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2" xmlns:ns0="http://enterprise.netbeans.org/bpel/WizardCorrelationProperties" xmlns:sxnmp="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/NMProperty" xmlns:ns1="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:ns2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns3="http://www.w3.org/2005/08/addressing" xmlns:sxxf="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions">
+
+    <import namespace="http://enterprise.netbeans.org/bpel/AsynchronousClient" location="AsynchronousClient.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://ewe.org/" location="127.0.0.1_8080/AsyncSharcnetJunto.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/WizardCorrelationProperties" location="WizardCorrelationProperties.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://schemas.xmlsoap.org/ws/2004/08/addressing" location="127.0.0.1_8080/wsaddressing.xsd" importType="http://www.w3.org/2001/XMLSchema"/>
+    <import namespace="http://fbd.org/" location="127.0.0.1_8080/FakeBrokerService/FakeBroker.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://amt.org/" location="127.0.0.1_8080/AplicacaoMontageService/AplicacaoMontage.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+
+    <partnerLinks>
+        <partnerLink name="PartnerLinkBroker" xmlns:tns="http://fbd.org/" partnerLinkType="tns:FakeBroker" partnerRole="role1"/>
+        <partnerLink name="PartnerLinkSharcnetExec" xmlns:tns="http://ewe.org/" partnerLinkType="tns:AsyncSharcnetImpl" partnerRole="role1"/>
+        <partnerLink name="PartnerLinkMontage" xmlns:tns="http://amt.org/" partnerLinkType="tns:AplicacaoMontage" partnerRole="role1"/>
+        <partnerLink name="PartnerLinkClient" xmlns:tns="http://enterprise.netbeans.org/bpel/AsynchronousClient" partnerLinkType="tns:AsynchronousClientPartnerLinkType" myRole="AsynchronousClientProvider"/>
+        <partnerLink name="PartnerLinkSharcnetResponse" xmlns:tns="http://ewe.org/" partnerLinkType="tns:AsyncSharcnetResponseImpl" myRole="role1"/>
+    </partnerLinks>
+
+    <variables>
+        <variable name="CorrigeMosaicoIn" xmlns:tns="http://amt.org/" messageType="tns:corrigeMosaico"/>
+        <variable name="CorrigeMosaicoOut" xmlns:tns="http://amt.org/" messageType="tns:corrigeMosaicoResponse"/>
+        <variable name="CombinaFundoOut" xmlns:tns="http://amt.org/" messageType="tns:combinaFundoResponse"/>
+        <variable name="CombinaFundoIn" xmlns:tns="http://amt.org/" messageType="tns:combinaFundo"/>
+        <variable name="ModelaFundoOut" xmlns:tns="http://amt.org/" messageType="tns:modelaFundoResponse"/>
+        <variable name="ModelaFundoIn" xmlns:tns="http://amt.org/" messageType="tns:modelaFundo"/>
+        <variable name="GeraMosaicoOut" xmlns:tns="http://amt.org/" messageType="tns:geraMosaicoResponse"/>
+        <variable name="GeraMosaicoIn" xmlns:tns="http://amt.org/" messageType="tns:geraMosaico"/>
+        <variable name="BuscaArquivosOut" xmlns:tns="http://amt.org/" messageType="tns:buscaArquivosResponse"/>
+        <variable name="BuscaArquivosIn" xmlns:tns="http://amt.org/" messageType="tns:buscaArquivos"/>
+        <variable name="RunOut" xmlns:tns="http://fbd.org/" messageType="tns:runResponse"/>
+        <variable name="RunIn" xmlns:tns="http://fbd.org/" messageType="tns:run"/>
+        <variable name="ExecSharcnetIn" xmlns:tns="http://ewe.org/" messageType="tns:execSharcnet">
+            <sxed2:editor></sxed2:editor>
+        </variable>
+        <variable name="OperationAOut" xmlns:tns="http://enterprise.netbeans.org/bpel/AsynchronousClient" messageType="tns:responseMessageClient"/>
+        <variable name="ResponseIn" xmlns:tns="http://ewe.org/" messageType="tns:response">
+            <sxed2:editor></sxed2:editor>
+        </variable>
+        <variable name="OperationAIn" xmlns:tns="http://enterprise.netbeans.org/bpel/AsynchronousClient" messageType="tns:requestMessageClient"/>
+    </variables>
+
+    <correlationSets>
+        <correlationSet name="wzrd_set_InvokeSharcnet_ReceiveSharcnet" properties="ns0:wzrd_prop_MessageID_RelatesTo"/>
+    </correlationSets>
+
+    <sequence>
+        <receive name="ReceiveInicio" createInstance="yes" partnerLink="PartnerLinkClient" operation="operationA" xmlns:tns="http://enterprise.netbeans.org/bpel/AsynchronousClient" portType="tns:MyPortTypeClient" variable="OperationAIn"></receive>
+        
+<assign name="Assign0">
+            <copy>
+                <from>'uuid:00000'</from>
+                <to>$RunIn.parameters/arg0</to>
+            </copy>
+            <copy>
+                <from>'WSDL'</from>
+                <to>$RunIn.parameters/arg1</to>
+            </copy>
+        </assign>
+
+        <invoke name="InvokeBroker" partnerLink="PartnerLinkBroker" operation="run" xmlns:tns="http://fbd.org/" portType="tns:FakeBroker" inputVariable="RunIn" outputVariable="RunOut"/>
+
+        <assign name="Assign1">
+            <copy>
+                <from>'http://localhost:18181/AsynchronousClient/response'</from>
+                <to>$ExecSharcnetIn.ReplyTo/ns1:Address</to>
+            </copy>
+            <copy>
+                <from>$OperationAIn.inputType/id</from>
+                <to variable="ExecSharcnetIn" part="MessageID"/>
+            </copy>
+            <copy>
+                <from>'auto'</from>
+                <to>$ExecSharcnetIn.parameters/server</to>
+            </copy>
+            <copy>
+                <from>'Usuario'</from>
+                <to>$ExecSharcnetIn.parameters/login</to>
+            </copy>
+            <copy>
+                <from>'SeNha'</from>
+                <to>$ExecSharcnetIn.parameters/senha</to>
+            </copy>
+            <copy>
+                <from>$OperationAIn.inputType/paramA</from>
+                <to>$ExecSharcnetIn.parameters/comando</to>
+            </copy>
+            <copy>
+                <from>'/home/tlechuga/out.log'</from>
+                <to>$ExecSharcnetIn.parameters/arqOutput</to>
+            </copy>
+            <copy>
+                <from>'N'</from>
+                <to>$ExecSharcnetIn.parameters/requisitos</to>
+            </copy>
+            <copy>
+                <from>$RunOut.parameters/return</from>
+                <to variable="ExecSharcnetIn" sxnmp:nmProperty="org.glassfish.openesb.outbound.address.url"/>
+            </copy>
+        </assign>
+
+        <invoke name="InvokeSharcnet" partnerLink="PartnerLinkSharcnetExec" operation="execSharcnet" xmlns:tns="http://ewe.org/" portType="tns:AsyncSharcnetImpl" inputVariable="ExecSharcnetIn" PolicyURIs="http://127.0.0.1:8080/AsyncSharcnetImplService/politica.xml">
+            <correlations>
+                <correlation set="wzrd_set_InvokeSharcnet_ReceiveSharcnet" initiate="yes"/>
+            </correlations>
+        </invoke>
+
+        <receive name="ReceiveSharcnet" createInstance="no" partnerLink="PartnerLinkSharcnetResponse" operation="response" xmlns:tns="http://ewe.org/" portType="tns:AsyncSharcnetResponseImpl" variable="ResponseIn">
+            <correlations>
+                <correlation set="wzrd_set_InvokeSharcnet_ReceiveSharcnet" initiate="no"/>
+            </correlations>
+        </receive>
+
+        <assign name="Assign3">
+            <copy>
+                <from>''</from>
+                <to variable="CorrigeMosaicoIn" part="parameters"/>
+            </copy>
+            <copy>
+                <from>''</from>
+                <to variable="CombinaFundoIn" part="parameters"/>
+            </copy>
+            <copy>
+                <from>''</from>
+                <to variable="ModelaFundoIn" part="parameters"/>
+            </copy>
+            <copy>
+                <from>''</from>
+                <to variable="GeraMosaicoIn" part="parameters"/>
+            </copy>
+            <copy>
+                <from>''</from>
+                <to variable="BuscaArquivosIn" part="parameters"/>
+            </copy>
+        </assign>
+
+        <invoke name="InvokeBuscaArquivos" partnerLink="PartnerLinkMontage" operation="buscaArquivos" xmlns:tns="http://amt.org/" portType="tns:AplicacaoMontage" inputVariable="BuscaArquivosIn" outputVariable="BuscaArquivosOut"/>
+        <invoke name="InvokeGeraMosaico" partnerLink="PartnerLinkMontage" operation="geraMosaico" xmlns:tns="http://amt.org/" portType="tns:AplicacaoMontage" inputVariable="GeraMosaicoIn" outputVariable="GeraMosaicoOut"/>
+        <invoke name="InvokeModelaFundo" partnerLink="PartnerLinkMontage" operation="modelaFundo" xmlns:tns="http://amt.org/" portType="tns:AplicacaoMontage" inputVariable="ModelaFundoIn" outputVariable="ModelaFundoOut"/>
+        <invoke name="InvokeCombinaFundo" partnerLink="PartnerLinkMontage" operation="combinaFundo" xmlns:tns="http://amt.org/" portType="tns:AplicacaoMontage" inputVariable="CombinaFundoIn" outputVariable="CombinaFundoOut"/>
+        <invoke name="InvokeCorrigeMosaico" partnerLink="PartnerLinkMontage" operation="corrigeMosaico" xmlns:tns="http://amt.org/" portType="tns:AplicacaoMontage" outputVariable="CorrigeMosaicoOut" inputVariable="CorrigeMosaicoIn"/>
+        <assign name="Assign2">
+            <copy>
+                <from>string($ResponseIn.RelatesTo)</from>
+                <to>$OperationAOut.resultType/id</to>
+            </copy>
+            <copy>
+                <from>concat('&#13;&#13;===RESULTADO CLUSTER====&#13;&#13;', $ResponseIn.parameters/result, '&#13;&#13;===RESULTADOS NAO CLUSTER====&#13;&#13;', $BuscaArquivosOut.parameters/return, $GeraMosaicoOut.parameters/return, $ModelaFundoOut.parameters/return, $CombinaFundoOut.parameters/return, $CorrigeMosaicoOut.parameters/return)</from>
+                <to>$OperationAOut.resultType/paramA</to>
+            </copy>
+        </assign>
+
+        <reply name="Reply1" partnerLink="PartnerLinkClient" operation="operationA" xmlns:tns="http://enterprise.netbeans.org/bpel/AsynchronousClient" portType="tns:MyPortTypeClient" variable="OperationAOut"/>
+    </sequence>
+
+</process>
